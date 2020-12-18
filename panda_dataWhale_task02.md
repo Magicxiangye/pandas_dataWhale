@@ -589,12 +589,8 @@ dtype: float64
 
 ```python
     #有点感觉不大行，但是能得出正确的答案
-    data = pd.Series([1,2,3])
-    #反向的为2的滑动窗口
-    #先得出反向的shift(-1)的数据
-    back_data= data.shift(-1)
-    print(back_data)
-    print(data + back_data)
+    data = pd.Series([1, 2, 3])[::-1]
+    print(data.rolling(2).sum()[::-1])
 ```
 
 #### 2.扩展窗口
