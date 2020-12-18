@@ -588,7 +588,13 @@ dtype: float64
 > `rolling` 对象的默认窗口方向都是向前的，某些情况下用户需要向后的窗口，例如对1,2,3设定向后窗口为2的 `sum` 操作，结果为3,5,NaN，此时应该如何实现向后的滑窗操作？（提示：使用 `shift` ）
 
 ```python
-    #有点感觉不大行，但是能得出正确的答案
+    #有点感觉不大行，但是能得出正确的答案(用了两种方法)
+     # data = pd.Series([1,2,3])
+    # #反向的为2的滑动窗口
+    # #先得出反向的shift(-1)的数据
+    # back_data= data.shift(-1)
+    # print(back_data)
+    # print(data + back_data)
     data = pd.Series([1, 2, 3])[::-1]
     print(data.rolling(2).sum()[::-1])
 ```
