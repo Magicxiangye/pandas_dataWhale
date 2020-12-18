@@ -412,9 +412,8 @@ dtype: float64
 #数据量大的话时间复杂度应该会挺高的
 #但是暂时没想到其他的方法
     data = pd.Series([1,2,3,4,5])
-    data2 = data.where(data >= 1)#先把超过上下限的赋为空
-    data3 = data2.where(data2 <= 2)
-    print(data3.clip(1, 2).fillna(value=100))#clip后再赋特定的值
+    data2 = data.where((data >= 1)|(data <= 2))#先把超过上下限的赋为空
+    print(data2.clip(1, 2).fillna(value=100))#clip后再赋特定的值
 ```
 
 #### 5.排序函数
