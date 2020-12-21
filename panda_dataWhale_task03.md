@@ -774,7 +774,7 @@ B     a     ALPHA   0  -9   1  -6   2   9  -7  -9
 > 尝试在 `rename_axis` 中使用函数完成与例子中一样的功能。
 
 ```python
-
+   df.rename_axis(index=lambda x:str.upper(x.index[-1].value))
 ```
 
 对于整个索引的元素替换，可以利用迭代器实现：
