@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from numpy import number
 
 if __name__ == '__main__':
@@ -26,5 +27,11 @@ if __name__ == '__main__':
     # test = set(df_multi.index.values)
     # print(list(test))
     # print(df_multi.loc[list(test)[0:3]].head())
-    gb = df.groupby()
-    print(gb.filter(lambda x: x.shape[0] > 100).head())
+    gb = df.groupby('Gender')[['Height', 'Weight']]
+    #gb.filter(lambda x: print(x.shape[0])).head()
+    #print(gb.filter(lambda x: x.shape[0] > 100).head())
+    #test = gb.apply(lambda x: pd.DataFrame(np.ones((2, 2)),index = ['a','b']))
+    #print(test)
+    print(df.groupby('Gender')[['Height', 'Weight']].mean())
+    test = gb.apply(lambda x: x.cov())
+    print(test)
