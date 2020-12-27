@@ -35,7 +35,15 @@ if __name__ == '__main__':
     # print(df.groupby('Gender')[['Height', 'Weight']].mean())
     # test = gb.apply(lambda x: x.cov())
     # print(test)
-    test1 = [1,3,4]
-    test4 = [2, 4, 6]
-    res = np.corrcoef(test4, test1)[0, 1]
-    print(res)
+    # test1 = [1,3,4]
+    # test4 = [2, 4, 6]
+    # res = np.corrcoef(test4, test1)[0, 1]
+    # print(res)
+    import numpy as np
+
+    df = pd.DataFrame(np.ones((4, 2)), index=pd.Index(
+        [('A', 'cat', 'big'), ('A', 'dog', 'small'), ('B', 'cat', 'big'), ('B', 'dog', 'small')]),
+                      columns=['col_1', 'col_2'])
+    print(df)
+    df_2 = pd.DataFrame(np.ones((4, 2)),index = pd.Index([('A', 'cat', 'big'),('A', 'dog','small'),('B', 'cat', 'big'),('B', 'dog', 'small')]),columns = ['index_1', 'index_2']).T
+    print(df_2)
