@@ -35,8 +35,9 @@ def us_Covid19():
 
 #EX2:实现join()函数（重难）
 def my_join(df1, df2, how='left'):
-    #理解答案的代码
+    #没啥思路
     #拼接完成后的表的索引，先保存
+    #
     res_col = df1.columns.tolist() + df2.columns.tolist()
     #how有是四种的连接方式
 
