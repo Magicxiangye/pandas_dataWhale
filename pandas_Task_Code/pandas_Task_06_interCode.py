@@ -1,6 +1,7 @@
 #第六章，综合练习代码
 
 import pandas as pd
+import math
 import numpy as np
 
 
@@ -20,19 +21,30 @@ def CompanyIncome():
     df2 = pd.read_csv('data/Company_data.csv')
     #先对第二章表格进行分组
     #分组的标准是【证卷代码和时间】
+    print(df1.dtypes)
     df2.set_index(['证券代码', '日期'])
+    #把两张表的证券代码的格式统一一下
+    df2['证券代码'] = df2['证券代码'].apply(lambda x: '#' + str(x).zfill(5))
+    print(df2.dtypes)
+    print(df2.head())
     def percent(x):
         count = []
+        entry_income = 0
         for per in x:
             per = per/x.sum()
             print(per)
-            count.append(per)
-        series = pd.Series(count)
-        return series
-
-
-    df2_group = df2.groupby(['证券代码', '日期'])['收入额'].apply(percent)
-    print(df2_group.size())
+            if per > 0:
+                entry_income += -(per * math.log2(per))
+            # count.append(per)
+        # DataF = pd.DataFrame(count)
+        return entry_income
+    df2.mask(df2['收入额'] < 0, 'NaN')
+    print(df2.head())
+    #df2['收入额'].apply(lambda x: x/x.sum())
+    df2_group = df2.groupby(['证券代码', '日期'])['收入额'].agg(percent)
+    #pd.DataFrame(df2_group, index=['证券代码', '日期'])
+    df2_group.columns = pd.Series('收入额')
+    print(df2_group.head(20))
 
 
 
