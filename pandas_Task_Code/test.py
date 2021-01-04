@@ -47,8 +47,6 @@ if __name__ == '__main__':
     # print(df)
     # df_2 = pd.DataFrame(np.ones((4, 2)),index = pd.Index([('A', 'cat', 'big'),('A', 'dog','small'),('B', 'cat', 'big'),('B', 'dog', 'small')]),columns = ['index_1', 'index_2']).T
     # print(df_2)
-    s = pd.Series([np.nan, np.nan, 1, np.nan, np.nan, np.nan, 2, np.nan, np.nan])
-    print(s.values)
-    res = s.interpolate(limit_direction='backward', limit=1)
-    print(res.values)
-    print( s.interpolate('nearest').values)
+    #
+    s = pd.Series(['abcd', 'efg', 'hi'])
+    print(s.str[-1: 0: -1])
