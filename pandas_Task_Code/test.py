@@ -3,50 +3,21 @@ import numpy as np
 from numpy import number
 
 if __name__ == '__main__':
-    # data = pd.Series([1,2,3])
-    # #反向的为2的滑动窗口
-    # #先得出反向的shift(-1)的数据
-    # back_data= data.shift(-1)
-    # print(back_data)
-    # print(data + back_data)
-    # data = pd.Series([1, 2, 3])[::-1]
-    # print(data.rolling(2).sum()[::-1])
-    # s = pd.Series(['a', 'b', 'c', 'd', 'e', 'f'],
-    #               index=[1, 3, 1, 2, 5, 4])
-    # print(s[1:-1:1])
-    #df = pd.read_csv('data/learn_pandas.csv')
-    #df_demo = df.set_index('Name')
-    #若要选出所有数值型的列
-    #布尔的选择列表
-    #print(df_demo.dtypes)
-    # condition_dtype = df.dtypes.isin(['int64','float64'])
-    # final_col = list(df.dtypes.loc[condition_dtype].index)
-    # print(df[final_col].head())
-    # df_multi = df.set_index(['School', 'Grade'])
-    # df_multi = df_multi.sort_index()
-    # test = set(df_multi.index.values)
-    # print(list(test))
-    # print(df_multi.loc[list(test)[0:3]].head())
-    #gb = df.groupby('Gender')[['Height', 'Weight']]
-    #gb.filter(lambda x: print(x.shape[0])).head()
-    #print(gb.filter(lambda x: x.shape[0] > 100).head())
-    #test = gb.apply(lambda x: pd.DataFrame(np.ones((2, 2)),index = ['a','b']))
-    #print(test)
-    # print(df.groupby('Gender')[['Height', 'Weight']].mean())
-    # test = gb.apply(lambda x: x.cov())
-    # print(test)
-    # test1 = [1,3,4]
-    # test4 = [2, 4, 6]
-    # res = np.corrcoef(test4, test1)[0, 1]
-    # print(res)
-    # import numpy as np
-    #
-    # df = pd.DataFrame(np.ones((4, 2)), index=pd.Index(
-    #     [('A', 'cat', 'big'), ('A', 'dog', 'small'), ('B', 'cat', 'big'), ('B', 'dog', 'small')]),
-    #                   columns=['col_1', 'col_2'])
-    # print(df)
-    # df_2 = pd.DataFrame(np.ones((4, 2)),index = pd.Index([('A', 'cat', 'big'),('A', 'dog','small'),('B', 'cat', 'big'),('B', 'dog', 'small')]),columns = ['index_1', 'index_2']).T
-    # print(df_2)
-    #
-    s = pd.Series(['abcd', 'efg', 'hi'])
-    print(s.str[-1: 0: -1])
+    s = pd.Series(['上海市黄浦区方浜中路249号','上海市宝山区密山路5号','北京市昌平区北农路2号'])
+    # 设置分组的条件的正则表达式
+    pat = '(\w+市)(\w+区)(\w+路)(\d+号)'
+    # 给替换的自定义函数添加字典来进行替换
+    city = {'上海市': 'Shanghai', '北京市': 'Beijing'}
+    district = {'昌平区': 'CP District', '黄浦区': 'HP District', '宝山区': 'BS District'}
+    road = {'方浜中路': 'Mid Fangbin Road', '密山路': 'Mishan Road', '北农路': 'Beinong Road'}
+    # 自定义的替换函数
+    def my_func(m):
+        # 在相应的正则表达式的基础上来进行替换
+        str_city = city[m.group(1)]
+        str_district = district[m.group(2)]
+        str_road = road[m.group(3)]
+        str_no = 'No. ' + m.group(4)[:-1]
+        return ' '.join([str_city, str_district, str_road, str_no])
+
+    # 使用方式
+    print(s.str.replace(pat, my_func, regex=True))
