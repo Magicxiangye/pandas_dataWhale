@@ -18,5 +18,7 @@ if __name__ == '__main__':
     #     str_road = road[m.group(3)]
     #     str_no = 'No. ' + m.group(4)[:-1]
     #     return ' '.join([str_city, str_district, str_road, str_no])
-    s = pd.Series(pd.date_range('2020-1-1', '2020-1-3', freq='D'))
-    print(s.dt.daysinmonth)
+    #
+    str = 'Benchmarking_Training_float_precision'
+    test = str.split('_')
+    print(test)
